@@ -3,10 +3,11 @@
 use App\Http\Controllers\AuthC;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersC;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PeminjamanC;
 use App\Http\Controllers\BukuC;
-use App\Http\Controllers\UsersC;
+
 
 route::get('/about', function(){
     return 'Salsabilla dan Novaliza !';

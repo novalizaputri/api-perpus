@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Storage;
 
 class UsersC extends Controller
 {
-    public function index()
+     function index()
     {
-        $users = UsersM::latest()->paginate(5);
+        $uspublicer = UsersM::latest()->paginate(5);
 
-        return new UsersR(true, 'List data users', $users);
+        return new UsersR(true, 'List data users', $user);
     }
 
     public function store(Request $request){
@@ -31,7 +31,7 @@ class UsersC extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $users = UsersM::create([
+        $user = UsersM::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'nama_user' => $request->nama_user,
@@ -39,14 +39,14 @@ class UsersC extends Controller
             'no_hp' => $request->no_hp,
         ]);
 
-        return new UsersR(true,'Data users Berhasil Di Tambahkan!', $users);
+        return new UsersR(true,'Data users Berhasil Di Tambahkan!', $user);
     }
 
-    public function show(UsersM $users){
-        return new UsersR(true, 'Data users Di Temukan!', $users);
+    public function show(UsersM $user){
+        return new UsersR(true, 'Data users Di Temukan!', $user);
     }
 
-    public function update(Request $request, UsersM $users){
+    public function update(Request $request, UsersM $user){
         $validator = Validator::make($request->all(), [
             'username' => 'required',
             'password' => 'required',
@@ -58,9 +58,9 @@ class UsersC extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        Storage::delete('public/users/'.$users->username);
+        Storage::delete('public/users/'.$user->username);
 
-            $users->update([
+            $user->update([
             'username' => $request->username,
             'password' => Hash::make($request->password),
             'nama_user' => $request->nama_user,
@@ -68,13 +68,13 @@ class UsersC extends Controller
             'no_hp' => $request->no_hp,
             ]);
             
-        return new UsersR(true, 'Data users Berhasil Diubah!', $users);
+        return new UsersR(true, 'Data users Berhasil Diubah!', $user);
     }
 
-    public function destroy(UsersM $users){
-        Storage::delete('public/users/'.$users->username);
+    public function destroy(UsersM $user){
+        Storage::delete('public/users/'.$user->username);
 
-        $users->delete();
+        $user->delete();
 
         return new UsersR(true, 'Data users Berhasil Dihapus!', null);
     }

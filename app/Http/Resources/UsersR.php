@@ -9,17 +9,16 @@ class UsersR extends JsonResource
     public $status;
     public $message;
 
-
-    public function __construct($status,$message,$resource)
+    public function __construct($status, $message, $resource)
     {
         parent::__construct($resource);
-        $this->status=$status;
-        $this->message=$message;
+        $this->status = $status;
+        $this->message = $message;
     }
 
     public function toArray($request)
     {
-        return [
+        return[
             'success' => $this->status,
             'message' => $this->message,
             'data'    => $this->resource
